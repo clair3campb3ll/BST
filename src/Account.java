@@ -7,6 +7,16 @@ public class Account implements Comparable<Account>{
     private String description;
     private LinkedList<Post> posts;
 
-    public Account
+    public Account(String n, String d){
+        name = n;
+        description = d;
+    }
 
+    public int compareTo(Account another) {
+        return name.compareTo(another.name);
+    }
+
+    public String toString(){
+        return name;
+    }
 }
