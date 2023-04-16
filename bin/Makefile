@@ -1,16 +1,26 @@
 # binary search program makefile
 # Claire Campbell
 
-CLASSES = BinaryTreeNode  BTQueueNode BTQueue BinaryTree \
-	BinarySearchTree BinarySearchTreeTest \
-	Posts Account Toktik
+JAVAC=usr/bin/javac
+JAVA=/usr/bin/java
 
 .SUFFIXES: .java .class 
+SRCDIR=src
+BINDIR=bin
 
-bin/%.class:src/%.java 
-	javac -d bin -cp bin $<
+$(BINDIR)/%.class:$(SRCDIR)/%.java
+	$(JAVAC) -d $(BINDIR)/ -cp $(BINDIR) $<
 
-classes: $(CLASSES:%=bin/%.class)
+CLASSES = BinaryTreeNode.class \
+	BTQueueNode.class BTQueue.class BinaryTree.class \
+	BinarySearchTree.class Account.class Posts.class Toktik.class 
+
+CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/%.class)
+
+default: $(CLASS_FILES)
 
 clean:
-	rm bin/*.class
+	rm $(BINDIR)/*.class
+
+run: $(CLASS_FILES)
+	$(JAVA) -cp bin Toktik
