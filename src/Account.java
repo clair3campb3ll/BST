@@ -1,7 +1,5 @@
 import java.util.LinkedList;
 
-import java.util.LinkedList;
-
 public class Account implements Comparable<Account>{
     private String name;
     private String description;
@@ -10,6 +8,23 @@ public class Account implements Comparable<Account>{
     public Account(String n, String d){
         name = n;
         description = d;
+        posts = new LinkedList<>();
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public void addPost(Post post){
+        posts.add(post);
+    }
+
+    public LinkedList<Post> getPosts(){
+        return posts;
     }
 
     public int compareTo(Account another) {
