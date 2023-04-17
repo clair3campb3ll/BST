@@ -5,6 +5,12 @@ public class Account implements Comparable<Account>{
     private String description;
     private LinkedList<Post> posts;
 
+    public Account(String n){
+        name = n;
+        description = "";
+        posts = new LinkedList<>();
+    }
+
     public Account(String n, String d){
         name = n;
         description = d;
@@ -32,6 +38,6 @@ public class Account implements Comparable<Account>{
     }
 
     public String toString(){
-        return name;
+        return "Name: " + name + "Description" + description;
     }
 }

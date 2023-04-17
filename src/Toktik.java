@@ -27,21 +27,56 @@ public class Toktik {
                 switch(choice) {
                     case "1": // find profile description
                         System.out.println("Enter an account name");
-                        String name = input.nextLine();
+                        Account account1 = new Account(input.nextLine());
+                        BinaryTreeNode<Account> node1 = accounts.find(account1);
+                        account1 = node1.data;
+                        System.out.println(account1.getDescription());
                         break;
                     case "2": // list all accounts
-
+                        accounts.levelOrder();
                         break;
                     case "3": // create an account
-                        createAccount();                       
+                        System.out.println("Enter an account name");
+                        String name = input.nextLine();
+                        System.out.println("Enter an account profile description");
+                        String description = input.nextLine();
+                        Account account2 = new Account(name,description);
+                        BinaryTreeNode<Account> node2 = accounts.find(account2);
+                        if (node2 == null){
+                            accounts.insert(account2);
+                            System.out.println("Successfully created account "+account2.getName());
+                        }
+                        else {
+                            System.out.println("An account with that name already exists!");
+                        }                     
                         break;
                     case "4": // delete an account
-                        deleteAccount();
+                        System.out.println("Enter an account name");
+                        Account account3 = new Account(input.nextLine());
+                        BinaryTreeNode<Account> node3 = accounts.find(account3);
+                        accounts.delete(account3, node3);
+                        System.out.println("Successfully deleted account "+account3.getName());
                         break;
                     case "5": // display all posts for a single account
+                        System.out.println("Enter an account name");
+                        Account account4 = new Account(input.nextLine());
+                        BinaryTreeNode<Account> node4 = accounts.find(account4);
+                        account4 = node4.data;
+                        account4.getPosts();
+
                         break;
                     case "6": // add a new post for an account
-                        addPost();
+                        System.out.println("Enter an account name");
+                        Account account5 = new Account(input.nextLine());
+                        System.out.println("Enter the post title:");
+                        String title = input.nextLine();
+                        System.out.println("Enter the name of the video filename:");
+                        String vidName = input.nextLine();
+                        System.out.println("Enter the number of likes:");
+                        int likes = input.nextInt();
+                        //BinaryTreeNode<Account> node4 = accounts.find(account4);
+                        Post post = new Post(title, vidName, likes);
+                        account5.addPost(post);
                         break;
                     case "7": // load a file of actions from disk and process this
                         break;
@@ -57,54 +92,4 @@ public class Toktik {
             } // end of try catch block
         } // end of while loop
     } // end of main
-
-    public static void findProfile(){
-        
-    }
-
-    public static void listAccounts(){
-
-    }
-
-    public static void createAccount(){
-        System.out.println("Enter an account name");
-        Scanner input = new Scanner(System.in);
-        String name = input.nextLine();
-        System.out.println("Enter an account profile description");
-        String description = input.nextLine();
-        Account account = new Account(name,description);
-        BinaryTreeNode<Account> existingAccount = accounts.find(account);
-        if (existingAccount == null){
-            accounts.insert(account);
-            System.out.println("Successfully created account "+account.getName());
-        }
-        else {
-            System.out.println("An account with that name already exists!");
-        }
-    }
-
-    public static void deleteAccount(){
-        System.out.println("Enter an account name");
-        Scanner input = new Scanner(System.in);
-        String name = input.nextLine();
-        Account account = new Account(name,description);
-        BinaryTreeNode<Account> existingAccount = accounts.find(Account);
-    }
-
-    public static void addPost(){
-        System.out.println("Enter an account name");
-        Scanner input = new Scanner(System.in);
-        String name = input.nextLine();
-        System.out.println("Enter the post title:");
-        String title = input.nextLine();
-        System.out.println("Enter the name of the video filename:");
-        String vidName = input.nextLine();
-        System.out.println("Enter the number of likes:");
-        int likes = input.nextInt();
-        input.nextLine();
-        Post post = new Post(title, vidName, likes); 
-        //account.addPost(post);
-    }
-    
-    
 } // end of Toktik class
