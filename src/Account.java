@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 import java.util.LinkedList;
 
 public class Account implements Comparable<Account>{
@@ -38,6 +41,6 @@ public class Account implements Comparable<Account>{
     }
 
     public String toString(){
-        return "Name: " + name + "Description" + description;
+        return "Name: " + name + "\nDescription: " + description;
     }
 }

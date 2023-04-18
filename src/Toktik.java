@@ -4,6 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * 
+ */
+
 public class Toktik {
     private static BinarySearchTree<Account> accounts;
 
@@ -30,19 +34,24 @@ public class Toktik {
                 switch(choice) {
                     case "1": // find profile description
                         System.out.println("Enter an account name");
-                        Account account1 = new Account(input.nextLine());
+                        Account account1 = new Account(input.next());
                         BinaryTreeNode<Account> node1 = accounts.find(account1);
                         account1 = node1.data;
-                        System.out.println(account1.getDescription());
+                        if (account1 != null) {
+                            System.out.println(account1.getDescription());
+                        }
+                        else {
+                            System.out.println("Account does not exist");
+                        }
                         break;
                     case "2": // list all accounts
                         accounts.levelOrder();
                         break;
                     case "3": // create an account
                         System.out.println("Enter an account name");
-                        String name = input.nextLine();
+                        String name = input.next();
                         System.out.println("Enter an account profile description");
-                        String description = input.nextLine();
+                        String description = input.next();
                         Account account2 = new Account(name,description);
                         BinaryTreeNode<Account> node2 = accounts.find(account2);
                         if (node2 == null){
@@ -55,40 +64,43 @@ public class Toktik {
                         break;
                     case "4": // delete an account
                         System.out.println("Enter an account name");
-                        Account account3 = new Account(input.nextLine());
+                        Account account3 = new Account(input.next());
                         BinaryTreeNode<Account> node3 = accounts.find(account3);
                         accounts.delete(account3, node3);
                         System.out.println("Successfully deleted account " + account3.getName());
                         break;
                     case "5": // display all posts for a single account
                         System.out.println("Enter an account name");
-                        Account account4 = new Account(input.nextLine());
+                        Account account4 = new Account(input.next());
                         BinaryTreeNode<Account> node4 = accounts.find(account4);
-                        if (node4 != null){
-                            account4 = node4.data;
-                            account4.getPosts();
+                        account4 = node4.data;
+                        if (account4 != null){
+                            System.out.println(account4.getPosts().toString());
+                        }
+                        else {
+                            System.out.println("Account not found!");
                         }
                         break;
                     case "6": // add a new post for an account
                         System.out.println("Enter an account name");
-                        Account account5 = new Account(input.nextLine());
+                        Account account5 = new Account(input.next());
                         System.out.println("Enter the post title:");
-                        String title = input.nextLine();
+                        String title = input.next();
                         System.out.println("Enter the name of the video filename:");
-                        String vidName = input.nextLine();
+                        String vidName = input.next();
                         System.out.println("Enter the number of likes:");
                         int likes = input.nextInt();
                         //BinaryTreeNode<Account> node4 = accounts.find(account4);
                         Post post = new Post(title, vidName, likes);
                         BinaryTreeNode<Account> node5 = accounts.find(account5);
-                        if (node5 != null) {
-                            account5 = node5.data;
+                        account5 = node5.data;
+                        if (account5 != null) {
                             account5.addPost(post);
                         }
                         break;
                     case "7": // load a file of actions from disk and process this
                         System.out.println("Enter the filename to be loaded from disk");
-                        String filename = input.nextLine();
+                        String filename = input.next();
                         try {
                             BufferedReader reader = new BufferedReader(new FileReader(filename));
                             String line;

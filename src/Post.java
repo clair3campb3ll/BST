@@ -1,3 +1,8 @@
+
+/**
+ * This class is used to create Post Object that stores the title, name and the number of likes for the object.
+ */
+
 public class Post implements Comparable<Post>{
     private String title;
     private String name;
@@ -28,6 +33,6 @@ public class Post implements Comparable<Post>{
 
     @Override
     public String toString(){
-        return title + "/n" + name + "/n" + likes;
+        return "Title: " + title + "\nName: " + name + "\nLikes: " + likes;
     }
 }
