@@ -11,9 +11,9 @@ BINDIR=bin
 $(BINDIR)/%.class:$(SRCDIR)/%.java
 	$(JAVAC) -d $(BINDIR)/ -cp $(BINDIR) $<
 
-CLASSES = BinaryTreeNode.class \
-	BTQueueNode.class BTQueue.class BinaryTree.class \
-	BinarySearchTree.class Posts.class Account.class Toktik.class 
+CLASSES = src/BinaryTreeNode.java \
+	src/BTQueueNode.java src/BTQueue.java src/BinaryTree.java \
+	src/BinarySearchTree.java src/Post.java src/Account.java src/Toktik.java 
 
 CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/%.class)
 

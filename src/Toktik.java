@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
 
 /**
  * 
@@ -34,14 +35,19 @@ public class Toktik {
                 switch(choice) {
                     case "1": // find profile description
                         System.out.println("Enter an account name");
-                        Account account1 = new Account(input.next());
-                        BinaryTreeNode<Account> node1 = accounts.find(account1);
-                        account1 = node1.data;
-                        if (account1 != null) {
-                            System.out.println(account1.getDescription());
+                        if (input.next() != null){
+                            Account account1 = new Account(input.next());
+                            BinaryTreeNode<Account> node1 = accounts.find(account1);
+                            account1 = node1.data;
+                            if (account1 != null) {
+                                System.out.println(account1.getDescription());
+                            }
+                            else {
+                                System.out.println("Account does not exist");
+                            }
                         }
-                        else {
-                            System.out.println("Account does not exist");
+                        else{
+                            System.out.println("Account name cannot be blank!");
                         }
                         break;
                     case "2": // list all accounts
@@ -102,9 +108,13 @@ public class Toktik {
                         System.out.println("Enter the filename to be loaded from disk");
                         String filename = input.next();
                         try {
+                            File file = new File(filename);
+                            Scanner fileReader = new Scanner(file);
+
                             BufferedReader reader = new BufferedReader(new FileReader(filename));
                             String line;
-                            while((line = reader.readLine()) != null) {
+                            while((line = fileReader.nextLine()) != null) {
+
                                 String[] parts = line.split(" ");
                                 if (parts[0].equals("Create")){
                                     String n = parts[1];
@@ -128,6 +138,7 @@ public class Toktik {
 
                             } // end while
                             reader.close();
+                            fileReader.close();
                         } // end try 
                         catch (IOException e) {
                             System.out.println("Error while reading file");
