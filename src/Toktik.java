@@ -96,7 +96,7 @@ public class Toktik {
                                 String[] parts = line.split(" ");
                                 if (parts[0].equals("Create")){
                                     String n = parts[1];
-                                    String d = line.substring(line.indexOf(name) + name.length() +1);
+                                    String d = line.substring(line.indexOf(n) + n.length() +1);
                                     Account account6 = new Account(n,d);
                                     accounts.insert(account6);
                                 } // end if
