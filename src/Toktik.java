@@ -50,7 +50,6 @@ public class Toktik {
                             else {
                                 System.out.println("There are no existing accounts!");
                             }
-                            
                         }
                         else{
                             System.out.println("Account name cannot be blank!");
