@@ -13,7 +13,7 @@ $(BINDIR)/%.class:$(SRCDIR)/%.java
 
 CLASSES = BinaryTreeNode.class \
 	BTQueueNode.class BTQueue.class BinaryTree.class \
-	BinarySearchTree.class Account.class Posts.class Toktik.class 
+	BinarySearchTree.class Posts.class Account.class Toktik.class 
 
 CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/%.class)
 
