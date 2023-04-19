@@ -34,7 +34,7 @@ public class Toktik {
                 switch(choice) {
                     case "1": // find profile description
                         System.out.println("Enter an account name: ");
-                        if (input.next() != null){
+                        if (input.next() != null) {
                             if (accounts.root != null){
                                 Account account1 = new Account(input.next());
                                 BinaryTreeNode<Account> node1 = accounts.find(account1);
@@ -43,15 +43,15 @@ public class Toktik {
                                     System.out.println(account1.getDescription());
                                 }
                                 else {
-                                    System.out.println("Account does not exist!");
-                                } 
+                                    System.out.println("Account does not exist!\n");
+                                }
                             }
                             else {
-                                System.out.println("There are no existing accounts!");
-                            }
+                                System.out.println("There are no existing accounts!\n");
+                            }    
                         }
-                        else{
-                            System.out.println("Account name cannot be blank!");
+                        else {
+                            System.out.println("Account name cannot be blank!\n");
                         }
                         break;
                     case "2": // list all accounts
@@ -60,7 +60,7 @@ public class Toktik {
                             accounts.levelOrder();
                         }
                         else {
-                            System.out.println("There are no existing accounts!");
+                            System.out.println("There are no existing accounts!\n");
                         }
                         break;
                     case "3": // create an account
@@ -72,49 +72,56 @@ public class Toktik {
                         BinaryTreeNode<Account> node2 = accounts.find(account2);
                         if (node2 == null){
                             accounts.insert(account2);
-                            System.out.println("Successfully created account: " + account2.getName());
+                            System.out.println("Successfully created account: " + account2.getName()+"\n");
                         }
                         else {
-                            System.out.println("An account with that name already exists!");
-                        }                     
+                            System.out.println("An account with that name already exists!\n");
+                        }
+                        //input.next();                     
                         break;
                     case "4": // delete an account
                         if (accounts.root != null){
-                            System.out.println("Enter an account name");
+                            System.out.println("Enter an account name:");
                             Account account3 = new Account(input.next());
                             BinaryTreeNode<Account> node3 = accounts.find(account3);
                             if (node3 != null){
                                 accounts.delete(account3, node3);
-                                System.out.println("Successfully deleted account " + account3.getName());
+                                System.out.println("Successfully deleted account: " + account3.getName()+"\n");
                             }
                             else {
-                                System.out.println("Account not found!");
+                                System.out.println("Account not found!\n");
                             }   
                         }
                         else {
-                            System.out.println("There are no existing accounts");
+                            System.out.println("There are no existing accounts!\n");
                         }
                         break;
                     case "5": // display all posts for a single account
                         if (accounts.root != null) {
-                            System.out.println("Enter an account name");
+                            System.out.println("Enter an account name:");
                             Account account4 = new Account(input.next());
                             BinaryTreeNode<Account> node4 = accounts.find(account4);
                             if (node4 != null){
                                 account4 = node4.data;
-                                System.out.println(account4.getPosts().toString());
+                                if (account4.getPosts().toString() != "[]"){
+                                    System.out.println(account4.getPosts().toString());
+                                }
+                                else {
+                                    System.out.println("Account " + account4.getName() + " has no posts!\n");
+                                }
+                                
                             }
                             else {
-                                System.out.println("Account not found!");
+                                System.out.println("Account not found!\n");
                             }
                         }
                         else {
-                            System.out.println("There are no existing accounts!");
+                            System.out.println("There are no existing accounts!\n");
                         }
                         break;
                     case "6": // add a new post for an account
                         if (accounts.root != null){
-                            System.out.println("Enter an account name");
+                            System.out.println("Enter an account name:");
                             Account account5 = new Account(input.next());
                             System.out.println("Enter the post title:");
                             String title = input.next();
@@ -122,7 +129,7 @@ public class Toktik {
                             String vidName = input.next();
                             System.out.println("Enter the number of likes:");
                             int likes = input.nextInt();
-                            //BinaryTreeNode<Account> node4 = accounts.find(account4);
+                            input.nextLine();
                             Post post = new Post(title, vidName, likes);
                             BinaryTreeNode<Account> node5 = accounts.find(account5);
                             if (node5 != null) {
@@ -130,20 +137,17 @@ public class Toktik {
                                 account5.addPost(post);
                             }
                             else {
-                                System.out.println("Account not found!");
+                                System.out.println("Account not found!\n");
                             }
                         }
                         else {
-                            System.out.println("There are no existing accounts!");
+                            System.out.println("There are no existing accounts!\n");
                         }
                         break;
                     case "7": // load a file of actions from disk and process this
                         System.out.println("Enter the filename to be loaded from disk:");
                         String filename = input.next();
                         try {
-                            //File file = new File(filename);
-                            //Scanner fileReader = new Scanner(file);
-
                             BufferedReader reader = new BufferedReader(new FileReader("src/"+filename));
                             String line = reader.readLine();
                             while((line = reader.readLine()) != null) {
@@ -157,11 +161,8 @@ public class Toktik {
                                 else if (parts[0].equals("Add")){
                                     String n = parts[1];
                                     String vidFileName = parts[2];
-                                    System.out.println(vidFileName);
-                                    //String numLikes = parts[3];
                                     String numLikes = parts[3];
                                     String t = line.substring(line.indexOf(numLikes)+ numLikes.length()+1);
-                                    System.out.println(t);
                                     Account account6 = new Account(n);
                                     Post p = new Post(t, vidFileName, Integer.parseInt(numLikes));
                                     BinaryTreeNode<Account> node6 = accounts.find(account6);
@@ -170,13 +171,12 @@ public class Toktik {
                                         account6.addPost(p);
                                     } // end if
                                     else {
-                                        System.out.println("Account not found!");
+                                        System.out.println("Account not found!\n");
                                     }
                                 } // end else
 
                             } // end while
                             reader.close();
-                            //fileReader.close();
                         } // end try 
                         catch (IOException e) {
                             System.out.println("Error while reading file");
@@ -187,7 +187,7 @@ public class Toktik {
                         System.out.println("Bye!"); 
                         break;
                     default: // other input is received
-                        System.out.println("Your choice is invalid. Choose an option from the list above!");
+                        System.out.println("Your choice is invalid. Choose an option from the list above!\n");
                 } // end of switch   
             } catch (Exception e) {
                 System.out.println("Something went wrong."+ e.getMessage());
@@ -195,4 +195,5 @@ public class Toktik {
         } // end of while loop
         input.close();
     } // end of main
+   
 } // end of Toktik class
