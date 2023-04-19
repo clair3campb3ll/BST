@@ -13,10 +13,6 @@ import java.util.Scanner;
  * linked list to store Post objects.
  * <p>
  * @author Claire Campbell
- * <p>
- * @param args Unused.
- * @return Nothing.
- * @IOException On reading a file.
  */
 
 public class Toktik {
